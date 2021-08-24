@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Programas de TV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <meta name="description" content="This is a description.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'javascript.js' %}" async defer></script>
+</head>
+
+<body>
+    {% for programa in programa %}
+    <div>
+        <h1>Editar Programa {{programa.id}}</h1>
+        <a href="/programas">Volver</a>
+    </div>
+    <form action="update" method="post">
+        {% csrf_token %}
+        <p>Titulo: <input name="titulo" type="text" value="{{programa.titulo}}"></p>
+        <p>Canal: <input name="canal" type="text" value="{{programa.canal.nombre}}"></p>
+        <p>Estreno: <input name="estreno" type="date" value="{{programa.estreno | date:" Y-m-d"}}"></p>
+        <p>Descripcion: <input name="descripcion" type="text" value="{{show.descripcion}}"></p>
+        <button type="submit">Actualiza</button>
+    </form>
+    <a href="/programas/{{programa.id}}">Ir Al Programa</a>
+    {% empty %}
+    <h1>ERROR: EL MOSTRAR CON ID ESPECIFICADO NO EXISTE.</h1>
+    {% endfor %}
+</body>
+
+</html>
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Programas de TV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <meta name="description" content="This is a description.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'javascript.js' %}" async defer></script>
+</head>
+
+<body>
+    <h1>Todos Los Programas</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Canal</th>
+            <th>Estreno</th>
+            <th>Accion</th>
+        </tr>
+        {% for programa in programas %}
+        <tr>
+            <td>{{programa.id}}</td>
+            <td>{{programa.titulo}}</td>
+            <td>{{programa.canal.nombre}}</td>
+            <td>{{programa.estreno}}</td>
+            <td>
+                <a href="/programas/{{programa.id}}">Programa</a> | <a
+                    href="/programas/{{programa.id}}/editar">Editar</a> | <a
+                    href="/programas/{{programa.id}}/Eliminar">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        {% endfor %}
+    </table>
+    <a href="/programas/nuevo">Agregar Nuevo Programa</a>
+</body>
+
+</html>
